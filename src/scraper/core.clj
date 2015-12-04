@@ -1,6 +1,12 @@
-(ns scraper.core)
+(ns scraper.core
+  (:require ;[clj-http.client :as http]
+            [net.cgrand.enlive-html :as html]))
 
-(defn foo
-  "I don't do a whole lot."
-  [x]
-  (println x "Hello, World!"))
+(defn -main
+  [& x]
+    (->
+      "https://news.ycombinator.com"
+      (java.net.URL.)
+      (html/html-resource)
+      (html/select [:body])
+      (println)))
